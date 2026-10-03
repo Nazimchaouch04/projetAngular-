@@ -16,6 +16,14 @@
             <strong>Places restantes :</strong> {{ remainingSeats(conference) }}
           </p>
           <button
+            class="details-button"
+            type="button"
+            (click)="selectConference(conference)"
+          >
+            Voir les détails
+          </button>
+          <button
+            class="registration-button"
             type="button"
             [class.seats-green]="remainingSeats(conference) >= 10"
             [class.seats-orange]="

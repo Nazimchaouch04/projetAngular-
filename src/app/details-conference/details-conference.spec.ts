@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetailsConference } from './details-conference';
+import type { ConferenceListing } from '../conference';
 
 describe('DetailsConference', () => {
   let component: DetailsConference;
@@ -18,6 +19,25 @@ describe('DetailsConference', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display the conference passed by its parent', () => {
+    const conference: ConferenceListing = {
+      title: 'Conférence de test',
+      description: 'Description de test',
+      date: '2026-11-12',
+      place: 'Tunis',
+      maxParticipants: 120,
+      nbParticipants: 46,
+    };
+
+    fixture.componentRef.setInput('conf', conference);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.textContent).toContain('Conférence de test');
+    expect(fixture.nativeElement.textContent).toContain('Description de test');
+    expect(fixture.nativeElement.textContent).toContain('12/11/2026');
+    expect(fixture.nativeElement.textContent).toContain('46 / 120');
   });
 
   it('should update the displayed title when the user types', () => {
