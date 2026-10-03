@@ -1,0 +1,38 @@
+.section-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 2rem;
+  padding: 0.5rem;
+  background: #e7eef5;
+  border: 1px solid var(--color-border);
+  border-radius: 0.85rem;
+}
+
+a {
+  padding: 0.65rem 0.9rem;
+  color: var(--color-ink);
+  border-radius: 0.55rem;
+  font-size: 0.92rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+a:hover {
+  color: #ffffff;
+  background: var(--color-primary);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a {
+    transition: none;
+  }
+}

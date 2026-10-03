@@ -1,0 +1,25 @@
+<section class="content-card" id="amis" aria-labelledby="friends-title">
+  <div class="section-heading">
+    <div>
+      <p class="section-label">Votre communauté</p>
+      <h2 id="friends-title">Mes amis</h2>
+    </div>
+    <span class="count">{{ friends.length }}</span>
+  </div>
+  <ul>
+    @for (friend of friends; track friend.name) {
+      <li>
+        <span class="friend-avatar" aria-hidden="true">{{ friend.initials }}</span>
+        <span class="friend-info">
+          <strong>{{ friend.name }}</strong>
+          <span>{{ friend.status }}</span>
+        </span>
+        <span
+          class="presence"
+          [class.is-online]="friend.online"
+          [attr.aria-label]="friend.online ? 'En ligne' : 'Hors ligne'"
+        ></span>
+      </li>
+    }
+  </ul>
+</section>

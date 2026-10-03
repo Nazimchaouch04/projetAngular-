@@ -1,0 +1,109 @@
+.content-card {
+  height: 100%;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1.1rem;
+  box-shadow: 0 12px 34px rgb(23 43 77 / 6%);
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.section-label {
+  margin: 0 0 0.35rem;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 1.25rem;
+}
+
+.count {
+  display: grid;
+  width: 2rem;
+  aspect-ratio: 1;
+  place-items: center;
+  color: var(--color-primary-dark);
+  background: #e1f2f3;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 750;
+}
+
+ul {
+  display: grid;
+  gap: 1rem;
+  margin: 1.35rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.friend-avatar {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2.6rem;
+  aspect-ratio: 1;
+  place-items: center;
+  color: #ffffff;
+  background: #526d82;
+  border-radius: 50%;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+li:nth-child(2) .friend-avatar {
+  background: #785c91;
+}
+
+li:nth-child(3) .friend-avatar {
+  background: #a55e49;
+}
+
+.friend-info {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.friend-info strong {
+  overflow: hidden;
+  color: var(--color-ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friend-info > span {
+  color: var(--color-muted);
+  font-size: 0.83rem;
+}
+
+.presence {
+  flex: 0 0 auto;
+  width: 0.6rem;
+  aspect-ratio: 1;
+  margin-left: auto;
+  background: #9aa9b7;
+  border-radius: 50%;
+}
+
+.presence.is-online {
+  background: #21865a;
+  box-shadow: 0 0 0 3px #e1f4e9;
+}

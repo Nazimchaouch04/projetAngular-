@@ -1,1 +1,25 @@
-<p>home works!</p>
+<main>
+  <header class="page-heading">
+    <p class="eyebrow">Votre espace personnel</p>
+    <h1>Bienvenue, Nazim</h1>
+    <p class="intro">Retrouvez votre profil, votre communauté et les dernières nouvelles.</p>
+  </header>
+  <app-navigation></app-navigation>
+  <div class="profile-layout">
+    <app-user-profile></app-user-profile>
+    <app-friends-list></app-friends-list>
+    <app-notifications></app-notifications>
+  </div>
+  <section
+    class="conference-section"
+    id="conference-detail"
+    aria-labelledby="conference-section-title"
+  >
+    <header class="section-intro">
+      <p class="eyebrow">Data-binding et Signals</p>
+      <h2 id="conference-section-title">Détail d’une conférence</h2>
+      <p>Modifiez le titre ou inscrivez-vous pour voir l’interface réagir immédiatement.</p>
+    </header>
+    <app-details-conference></app-details-conference>
+  </section>
+</main>

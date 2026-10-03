@@ -1,0 +1,55 @@
+.site-header {
+  color: #ffffff;
+  background: linear-gradient(115deg, #102a43, #126e82);
+  border-bottom: 4px solid #f2b84b;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(1100px, calc(100% - 2.5rem));
+  min-height: 84px;
+  margin: 0 auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: inherit;
+  font-size: 1.25rem;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 2.35rem;
+  aspect-ratio: 1;
+  place-items: center;
+  color: #102a43;
+  background: #f2b84b;
+  border-radius: 0.75rem;
+}
+
+.header-caption {
+  margin: 0;
+  color: #e3f2f5;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+  .header-content {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .header-caption {
+    font-size: 0.85rem;
+  }
+}

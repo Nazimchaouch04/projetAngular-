@@ -1,0 +1,66 @@
+.profile-card {
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgb(18 110 130 / 12%), transparent 45%),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 1.1rem;
+  box-shadow: 0 12px 34px rgb(23 43 77 / 6%);
+}
+
+.section-label {
+  margin: 0 0 1rem;
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.profile-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  display: grid;
+  flex: 0 0 auto;
+  width: 4rem;
+  aspect-ratio: 1;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(145deg, #126e82, #102a43);
+  border: 3px solid #d7eef0;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  font-weight: 750;
+}
+
+h2 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: 1.35rem;
+}
+
+.profile-role,
+.profile-location,
+.profile-bio {
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.profile-role {
+  margin: 0.35rem 0 0;
+}
+
+.profile-location {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+}
+
+.profile-bio {
+  margin: 1.25rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}

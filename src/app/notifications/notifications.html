@@ -1,0 +1,23 @@
+<section class="content-card" id="notifications" aria-labelledby="notifications-title">
+  <div class="section-heading">
+    <div>
+      <p class="section-label">Restez informé</p>
+      <h2 id="notifications-title">Notifications</h2>
+    </div>
+    <span class="count" [attr.aria-label]="notifications.length + ' notifications'">
+      {{ notifications.length }}
+    </span>
+  </div>
+  <ul>
+    @for (notification of notifications; track notification.title) {
+      <li [class.unread]="notification.unread">
+        <span class="notification-mark" aria-hidden="true"></span>
+        <div class="notification-content">
+          <h3>{{ notification.title }}</h3>
+          <p>{{ notification.message }}</p>
+          <time>{{ notification.time }}</time>
+        </div>
+      </li>
+    }
+  </ul>
+</section>
