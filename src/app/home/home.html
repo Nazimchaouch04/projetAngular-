@@ -11,7 +11,9 @@
     <app-notifications></app-notifications>
   </div>
   <section class="conference-section" id="conferences" aria-labelledby="conference-list-title">
-    <app-liste-conference></app-liste-conference>
+    <app-liste-conference
+      (conferenceSelected)="selectConference($event)"
+    ></app-liste-conference>
   </section>
   <section
     class="conference-section"
@@ -21,8 +23,12 @@
     <header class="section-intro">
       <p class="eyebrow">Data-binding et Signals</p>
       <h2 id="conference-section-title">Détail d’une conférence</h2>
-      <p>Modifiez le titre ou inscrivez-vous pour voir l’interface réagir immédiatement.</p>
+      @if (selectedConference()) {
+        <p>Conférence sélectionnée dans la liste.</p>
+      } @else {
+        <p>Modifiez le titre ou inscrivez-vous pour voir l’interface réagir immédiatement.</p>
+      }
     </header>
-    <app-details-conference></app-details-conference>
+    <app-details-conference [conf]="selectedConference()"></app-details-conference>
   </section>
 </main>

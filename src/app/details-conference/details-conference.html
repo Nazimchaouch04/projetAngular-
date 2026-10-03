@@ -1,8 +1,22 @@
 @if (conf(); as conference) {
   <article class="conference-card" aria-label="Conférence sélectionnée">
-    <h3>{{ conference.name }}</h3>
-    <p><strong>Date :</strong> {{ conference.date }}</p>
-    <p><strong>Lieu :</strong> {{ conference.location }}</p>
+    <p class="section-label">Conférence sélectionnée</p>
+    <h2>{{ conference.title }}</h2>
+    <p class="conference-description">{{ conference.description }}</p>
+    <dl class="conference-facts">
+      <div>
+        <dt>Date</dt>
+        <dd>{{ conference.date | date: 'dd/MM/yyyy' }}</dd>
+      </div>
+      <div>
+        <dt>Lieu</dt>
+        <dd>{{ conference.place }}</dd>
+      </div>
+      <div>
+        <dt>Participants</dt>
+        <dd>{{ conference.nbParticipants }} / {{ conference.maxParticipants }}</dd>
+      </div>
+    </dl>
   </article>
 } @else {
   <section class="conference-card" aria-labelledby="conference-detail-title">
