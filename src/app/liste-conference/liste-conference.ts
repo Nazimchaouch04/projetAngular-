@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, output, signal } from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import type { ConferenceListing } from '../conference';
 
@@ -10,6 +10,7 @@ import type { ConferenceListing } from '../conference';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListeConference {
+  readonly conferenceSelected = output<ConferenceListing>();
   readonly conferences = signal<ConferenceListing[]>([
     {
       title: 'Angular et les applications réactives',
@@ -56,6 +57,10 @@ export class ListeConference {
 
   remainingSeats(conference: ConferenceListing): number {
     return Math.max(0, conference.maxParticipants - conference.nbParticipants);
+  }
+
+  selectConference(conference: ConferenceListing): void {
+    this.conferenceSelected.emit(conference);
   }
 
   register(conference: ConferenceListing): void {

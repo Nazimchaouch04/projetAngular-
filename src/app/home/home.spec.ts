@@ -36,4 +36,38 @@ describe('Home', () => {
     expect(page.querySelector('app-details-conference')).toBeTruthy();
     expect(page.querySelector('app-liste-conference')).toBeTruthy();
   });
+
+  it('should pass a selected conference from the list to the details component', () => {
+    const page: HTMLElement = fixture.nativeElement;
+    const selectButton = Array.from(page.querySelectorAll<HTMLButtonElement>('button.details-button')).find((button) =>
+      button.textContent?.includes('Voir les détails'),
+    );
+
+    expect(selectButton).toBeDefined();
+    expect(page.textContent).toContain('Modifiez le titre ou inscrivez-vous');
+
+    selectButton?.click();
+    fixture.detectChanges();
+
+    expect(page.textContent).toContain('Conférence sélectionnée dans la liste.');
+    expect(page.textContent).toContain('Angular et les applications réactives');
+    expect(page.textContent).toContain('Participants');
+    expect(page.textContent).not.toContain('Modifier le titre de la conférence');
+
+    const secondSelectButton = Array.from(
+      page.querySelectorAll<HTMLButtonElement>('button.details-button'),
+    ).find(
+      (button) =>
+        button.textContent?.includes('Voir les détails') &&
+        button
+          .closest('article')
+          ?.textContent?.includes('CONCEVOIR DES INTERFACES ACCESSIBLES'),
+    );
+
+    secondSelectButton?.click();
+    fixture.detectChanges();
+
+    expect(page.textContent).toContain('Concevoir des interfaces accessibles');
+    expect(page.textContent).toContain('Sousse');
+  });
 });
