@@ -27,4 +27,11 @@ describe('Home', () => {
     expect(page.querySelector('#amis')).toBeTruthy();
     expect(page.querySelector('#notifications')).toBeTruthy();
   });
+
+  it('should display the conference details section', () => {
+    const page: HTMLElement = fixture.nativeElement;
+
+    expect(page.textContent).toContain('Détail d’une conférence');
+    expect(page.querySelector('app-details-conference')).toBeTruthy();
+  });
 });
