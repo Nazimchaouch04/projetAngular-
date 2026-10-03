@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import type { ConferenceListing } from '../conference';
 import { DetailsConference } from '../details-conference/details-conference';
 import { FriendsList } from '../friends-list/friends-list';
 import { ListeConference } from '../liste-conference/liste-conference';
@@ -20,4 +21,10 @@ import { UserProfile } from '../user-profile/user-profile';
   styleUrl: './home.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Home {}
+export class Home {
+  readonly selectedConference = signal<ConferenceListing | null>(null);
+
+  selectConference(conference: ConferenceListing): void {
+    this.selectedConference.set(conference);
+  }
+}

@@ -29,6 +29,18 @@ describe('ListeConference', () => {
     expect(text).not.toContain('CONFÉRENCE PASSÉE');
   });
 
+  it('should emit the selected conference for the parent component', () => {
+    const conference = component.upcomingConferences()[0];
+    let selectedConference: typeof conference | undefined;
+
+    component.conferenceSelected.subscribe((selected) => {
+      selectedConference = selected;
+    });
+    component.selectConference(conference);
+
+    expect(selectedConference).toEqual(conference);
+  });
+
   it('should update the available-seat count when registering', () => {
     const conference = component.upcomingConferences()[0];
     const seatsBefore = component.remainingSeats(conference);
@@ -45,7 +57,7 @@ describe('ListeConference', () => {
 
   it('should apply the availability color and disable full conferences', () => {
     const buttons: NodeListOf<HTMLButtonElement> =
-      fixture.nativeElement.querySelectorAll('button');
+      fixture.nativeElement.querySelectorAll('.registration-button');
 
     expect(buttons[0].classList.contains('seats-green')).toBe(true);
     expect(buttons[1].classList.contains('seats-orange')).toBe(true);

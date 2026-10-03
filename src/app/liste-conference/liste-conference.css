@@ -74,9 +74,7 @@ h3 {
 button {
   width: 100%;
   min-height: 2.8rem;
-  margin-top: auto;
   padding: 0.65rem 0.9rem;
-  color: #ffffff;
   border: 0;
   border-radius: 0.55rem;
   cursor: pointer;
@@ -85,6 +83,21 @@ button {
   transition:
     filter 160ms ease,
     transform 160ms ease;
+}
+
+.details-button {
+  margin-top: 1rem;
+  color: var(--color-primary-dark);
+  background: #e1f2f3;
+}
+
+.details-button:hover {
+  background: #cce9eb;
+}
+
+.registration-button {
+  margin-top: 0.6rem;
+  color: #ffffff;
 }
 
 button:hover:not(:disabled) {
