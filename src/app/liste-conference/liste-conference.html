@@ -1,4 +1,40 @@
-<h1>Liste des conférences</h1>
-@for(conf of conferences; track conf) {
-    <app-details-conference [conf]="conf"></app-details-conference>
- }
+<section class="conference-list" aria-labelledby="conference-list-title">
+  <header class="list-heading">
+    <p class="section-label">À venir</p>
+    <h2 id="conference-list-title">Les prochaines conférences</h2>
+  </header>
+
+  @if (upcomingConferences().length > 0) {
+    <div class="conference-grid">
+      @for (conference of upcomingConferences(); track conference.title) {
+        <article class="conference-card">
+          <p class="conference-date">{{ conference.date | date: 'dd/MM/yyyy' }}</p>
+          <h3>{{ conference.title | uppercase }}</h3>
+          <p class="description">{{ conference.description }}</p>
+          <p class="place"><strong>Lieu :</strong> {{ conference.place }}</p>
+          <p class="seats">
+            <strong>Places restantes :</strong> {{ remainingSeats(conference) }}
+          </p>
+          <button
+            type="button"
+            [class.seats-green]="remainingSeats(conference) >= 10"
+            [class.seats-orange]="
+              remainingSeats(conference) > 0 && remainingSeats(conference) < 10
+            "
+            [class.seats-red]="remainingSeats(conference) === 0"
+            [disabled]="remainingSeats(conference) === 0"
+            (click)="register(conference)"
+          >
+            @if (remainingSeats(conference) > 0) {
+              S’inscrire
+            } @else {
+              Complet
+            }
+          </button>
+        </article>
+      }
+    </div>
+  } @else {
+    <p class="empty-state" role="status">Aucune conférence à venir pour le moment.</p>
+  }
+</section>
