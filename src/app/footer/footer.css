@@ -1,0 +1,17 @@
+.site-footer {
+  margin-top: 4rem;
+  padding: 1.5rem 1rem;
+  color: #d9e6f2;
+  background: #102a43;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.site-footer span {
+  padding: 0 0.35rem;
+  color: #f2b84b;
+}
