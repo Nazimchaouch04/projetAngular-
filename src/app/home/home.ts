@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FriendsList } from '../friends-list/friends-list';
+import { Navigation } from '../navigation/navigation';
+import { Notifications } from '../notifications/notifications';
+import { UserProfile } from '../user-profile/user-profile';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [Navigation, UserProfile, FriendsList, Notifications],
   templateUrl: './home.html',
   styleUrl: './home.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {}
