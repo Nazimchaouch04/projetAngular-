@@ -26,6 +26,7 @@ describe('Home', () => {
     expect(page.querySelector('#profil')).toBeTruthy();
     expect(page.querySelector('#amis')).toBeTruthy();
     expect(page.querySelector('#notifications')).toBeTruthy();
+    expect(page.querySelector('#conferences')).toBeTruthy();
   });
 
   it('should display the conference details section', () => {
@@ -33,5 +34,6 @@ describe('Home', () => {
 
     expect(page.textContent).toContain('Détail d’une conférence');
     expect(page.querySelector('app-details-conference')).toBeTruthy();
+    expect(page.querySelector('app-liste-conference')).toBeTruthy();
   });
 });
