@@ -1,3 +1,49 @@
-<p>{{ conf().name }}</p>
-<p>{{ conf().date }}</p>
-<p>{{ conf().location }}</p>
+@if (conf(); as conference) {
+  <article class="conference-card" aria-label="Conférence sélectionnée">
+    <h3>{{ conference.name }}</h3>
+    <p><strong>Date :</strong> {{ conference.date }}</p>
+    <p><strong>Lieu :</strong> {{ conference.location }}</p>
+  </article>
+} @else {
+  <section class="conference-card" aria-labelledby="conference-detail-title">
+    <p class="section-label">À la une</p>
+    <h2 id="conference-detail-title">{{ title() }}</h2>
+    <p class="conference-description">
+      Découvrez les nouveautés Angular et les bonnes pratiques pour construire des applications
+      réactives.
+    </p>
+
+    <label for="conference-title">Modifier le titre de la conférence</label>
+    <input
+      id="conference-title"
+      type="text"
+      [value]="title()"
+      (input)="updateTitle($event)"
+    />
+
+    <dl class="conference-facts">
+      <div>
+        <dt>Intervenante</dt>
+        <dd>{{ speaker() }}</dd>
+      </div>
+      <div>
+        <dt>Date</dt>
+        <dd>{{ eventDate() }}</dd>
+      </div>
+      <div>
+        <dt>Places disponibles</dt>
+        <dd>{{ availableSeats() }}</dd>
+      </div>
+    </dl>
+
+    @if (availableSeats() > 0) {
+      <button type="button" (click)="register()">S’inscrire</button>
+    } @else {
+      <p class="sold-out" role="status">Toutes les places sont réservées.</p>
+    }
+
+    @if (registrationMessage()) {
+      <p class="registration-message" role="status">{{ registrationMessage() }}</p>
+    }
+  </section>
+}
