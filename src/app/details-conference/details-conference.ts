@@ -1,5 +1,13 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import type { ConferenceListing } from '../conference';
 import { BookingService } from '../services/booking.service';
 import { ConferenceService } from '../services/conference.service';
@@ -13,6 +21,7 @@ import { ConferenceService } from '../services/conference.service';
 })
 export class DetailsConference {
   readonly conf = input<ConferenceListing | null>(null);
+  readonly registrationSucceeded = output<ConferenceListing>();
   private readonly conferenceService = inject(ConferenceService);
   private readonly bookingService = inject(BookingService);
   readonly currentConference = computed(() => {
@@ -46,6 +55,7 @@ export class DetailsConference {
 
     if (this.bookingService.book(conference)) {
       this.registrationMessage.set('Votre inscription est prise en compte.');
+      this.registrationSucceeded.emit(conference);
     } else if (this.bookingService.isBooked(conference)) {
       this.registrationMessage.set('Vous êtes déjà inscrit à cette conférence.');
     } else {

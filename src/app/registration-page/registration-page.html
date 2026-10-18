@@ -1,0 +1,72 @@
+<main class="registration-page">
+  <header class="page-heading">
+    <p class="eyebrow">Votre espace ConfTech</p>
+    <h1>Inscriptions et programme</h1>
+    <p>Retrouvez vos réservations et inscrivez-vous aux prochaines conférences.</p>
+  </header>
+
+  <section class="program-panel" aria-labelledby="bookings-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">À ne pas manquer</p>
+        <h2 id="bookings-title">Mon programme</h2>
+      </div>
+      <span class="booking-count" aria-label="Nombre de réservations">
+        {{ bookingService.bookingCount() }}
+      </span>
+    </div>
+    @if (bookingService.bookedConferences().length > 0) {
+      <ul class="booked-list">
+        @for (conference of bookingService.bookedConferences(); track conference.id) {
+          <li>
+            <strong>{{ conference.title }}</strong>
+            <span>{{ conference.date | date: 'dd/MM/yyyy' }} · {{ conference.place }}</span>
+            <a [routerLink]="['/conferences', conference.id]">Voir la fiche</a>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="empty-state">Aucune réservation pour le moment. Choisissez une conférence ci-dessous.</p>
+    }
+  </section>
+
+  <section class="conference-options" aria-labelledby="options-title">
+    <header class="section-heading">
+      <div>
+        <p class="eyebrow">Prochainement</p>
+        <h2 id="options-title">Réserver une place</h2>
+      </div>
+      <a routerLink="/conferences">Voir le catalogue</a>
+    </header>
+    <div class="conference-grid">
+      @for (conference of conferenceService.upcomingConferences(); track conference.id) {
+        <article class="conference-card">
+          <p class="conference-date">{{ conference.date | date: 'dd/MM/yyyy' }} · {{ conference.place }}</p>
+          <h3>{{ conference.title }}</h3>
+          <p>{{ conference.description }}</p>
+          <p class="seats">
+            {{ conferenceService.remainingSeats(conference) }} place(s) disponible(s)
+          </p>
+          <button
+            type="button"
+            [disabled]="isBooked(conference) || conferenceService.remainingSeats(conference) === 0"
+            (click)="register(conference)"
+          >
+            @if (isBooked(conference)) {
+              Déjà inscrit
+            } @else if (conferenceService.remainingSeats(conference) === 0) {
+              Complet
+            } @else {
+              S’inscrire
+            }
+          </button>
+        </article>
+      } @empty {
+        <p class="empty-state">Aucune conférence à venir pour le moment.</p>
+      }
+    </div>
+    @if (message()) {
+      <p class="registration-message" role="status">{{ message() }}</p>
+    }
+  </section>
+</main>

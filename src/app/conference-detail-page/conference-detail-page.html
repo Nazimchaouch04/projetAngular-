@@ -1,0 +1,20 @@
+<main class="detail-page">
+  <a class="back-link" routerLink="/conferences">← Retour au catalogue</a>
+  @if (conference(); as selectedConference) {
+    <header class="page-heading">
+      <p class="eyebrow">Fiche conférence</p>
+      <h1>{{ selectedConference.title }}</h1>
+      <p>Consultez les informations et gérez votre inscription.</p>
+    </header>
+    <app-details-conference
+      [conf]="selectedConference"
+      (registrationSucceeded)="confirmRegistration($event)"
+    ></app-details-conference>
+  } @else {
+    <section class="not-found" role="status">
+      <h1>Conférence introuvable</h1>
+      <p>Le lien est peut-être incorrect ou cette conférence n’est plus disponible.</p>
+      <a routerLink="/conferences">Parcourir les conférences</a>
+    </section>
+  }
+</main>

@@ -1,0 +1,19 @@
+<main class="admin-layout">
+  <header class="admin-heading">
+    <p class="eyebrow">ConfTech · Administration</p>
+    <h1>Espace administrateur</h1>
+  </header>
+  <div class="admin-workspace">
+    <nav class="admin-navigation" aria-label="Navigation administrateur">
+      <a routerLink="/admin/dashboard" routerLinkActive="is-active">Tableau de bord</a>
+      <a routerLink="/admin/conferences" routerLinkActive="is-active">Conférences</a>
+      <a routerLink="/admin/intervenants" routerLinkActive="is-active">Intervenants</a>
+      <a routerLink="/admin/paiements" routerLinkActive="is-active">Paiements</a>
+      <a routerLink="/admin/statistiques" routerLinkActive="is-active">Statistiques</a>
+      <a routerLink="/admin/utilisateurs" routerLinkActive="is-active">Utilisateurs</a>
+    </nav>
+    <section class="admin-content" aria-live="polite">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</main>
