@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { BookingService } from '../services/booking.service';
 
 @Component({
   selector: 'app-navigation',
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './navigation.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Navigation {}
+export class Navigation {
+  readonly bookingService = inject(BookingService);
+}

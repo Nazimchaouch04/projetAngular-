@@ -11,4 +11,22 @@
   <p class="profile-bio">
     Je découvre de nouvelles idées, partage mes expériences et rencontre la communauté tech.
   </p>
+  <section class="personal-program" id="programme" aria-labelledby="program-title">
+    <div class="program-heading">
+      <h3 id="program-title">Mon programme</h3>
+      <span>{{ bookingService.bookingCount() }}</span>
+    </div>
+    @if (bookingService.bookedConferences().length > 0) {
+      <ul>
+        @for (conference of bookingService.bookedConferences(); track conference.title) {
+          <li>
+            <strong>{{ conference.title }}</strong>
+            <span>{{ conference.date | date: 'dd/MM/yyyy' }} · {{ conference.place }}</span>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="empty-program">Vos conférences réservées apparaîtront ici.</p>
+    }
+  </section>
 </section>

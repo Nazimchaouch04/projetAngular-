@@ -4,7 +4,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 1.1rem;
-  box-shadow: 0 12px 34px rgb(23 43 77 / 6%);
+  box-shadow: 0 12px 34px rgb(32 36 58 / 6%);
 }
 
 .section-heading {
@@ -53,14 +53,14 @@ li {
   display: flex;
   gap: 0.75rem;
   padding: 0.85rem;
-  background: #f7fafc;
+  background: #f8f8fc;
   border: 1px solid transparent;
   border-radius: 0.7rem;
 }
 
 li.unread {
-  background: #f0f8f9;
-  border-color: #d3e9eb;
+  background: #f2f2ff;
+  border-color: #e0e0ff;
 }
 
 .notification-mark {
@@ -74,7 +74,7 @@ li.unread {
 
 .unread .notification-mark {
   background: var(--color-primary);
-  box-shadow: 0 0 0 3px #d9eff0;
+  box-shadow: 0 0 0 3px #e5e5ff;
 }
 
 .notification-content h3 {

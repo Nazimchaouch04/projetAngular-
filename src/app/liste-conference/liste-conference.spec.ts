@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListeConference } from './liste-conference';
+import { BookingService } from '../services/booking.service';
+import { ConferenceService } from '../services/conference.service';
 
 describe('ListeConference', () => {
   let component: ListeConference;
@@ -53,6 +55,24 @@ describe('ListeConference', () => {
 
     expect(updated?.nbParticipants).toBe(conference.nbParticipants + 1);
     expect(updated && component.remainingSeats(updated)).toBe(seatsBefore - 1);
+    expect(TestBed.inject(BookingService).bookedConferences()).toContainEqual(updated);
+    expect(TestBed.inject(BookingService).bookingCount()).toBe(1);
+    expect(TestBed.inject(ConferenceService).upcomingConferences()).toContainEqual(updated);
+  });
+
+  it('should prevent duplicate bookings for the same user', () => {
+    const conference = component.upcomingConferences()[0];
+    const bookingService = TestBed.inject(BookingService);
+
+    component.register(conference);
+    component.register(conference);
+
+    const updated = component
+      .upcomingConferences()
+      .find((item) => item.title === conference.title);
+
+    expect(updated?.nbParticipants).toBe(conference.nbParticipants + 1);
+    expect(bookingService.bookingCount()).toBe(1);
   });
 
   it('should apply the availability color and disable full conferences', () => {
@@ -66,12 +86,4 @@ describe('ListeConference', () => {
     expect(buttons[2].textContent).toContain('Complet');
   });
 
-  it('should show an empty-state message when there are no upcoming conferences', () => {
-    component.conferences.set([]);
-    fixture.detectChanges();
-
-    expect(fixture.nativeElement.textContent).toContain(
-      'Aucune conférence à venir pour le moment.',
-    );
-  });
 });

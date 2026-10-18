@@ -4,7 +4,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 1.1rem;
-  box-shadow: 0 12px 34px rgb(23 43 77 / 6%);
+  box-shadow: 0 12px 34px rgb(32 36 58 / 6%);
 }
 
 .section-heading {
@@ -35,7 +35,7 @@ h2 {
   aspect-ratio: 1;
   place-items: center;
   color: var(--color-primary-dark);
-  background: #e1f2f3;
+  background: #ededff;
   border-radius: 50%;
   font-size: 0.85rem;
   font-weight: 750;
