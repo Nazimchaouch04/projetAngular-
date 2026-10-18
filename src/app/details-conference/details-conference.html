@@ -17,7 +17,21 @@
           <dt>Participants</dt>
           <dd>{{ conference.nbParticipants }} / {{ conference.maxParticipants }}</dd>
         </div>
+        <div>
+          <dt>Places disponibles</dt>
+          <dd>{{ availableSeats() }}</dd>
+        </div>
       </dl>
+      @if (availableSeats() > 0 && !isBooked()) {
+        <button type="button" (click)="register()">S’inscrire</button>
+      } @else if (isBooked()) {
+        <p class="registration-message" role="status">Vous êtes déjà inscrit à cette conférence.</p>
+      } @else {
+        <p class="sold-out" role="status">Toutes les places sont réservées.</p>
+      }
+      @if (registrationMessage()) {
+        <p class="registration-message" role="status">{{ registrationMessage() }}</p>
+      }
     </article>
   }
 } @else {

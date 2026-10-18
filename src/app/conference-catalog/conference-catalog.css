@@ -1,0 +1,38 @@
+.catalog-page {
+  width: min(1280px, calc(100% - 3rem));
+  min-height: 55vh;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) 0 1rem;
+}
+
+.page-heading {
+  margin-bottom: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.65rem;
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.05em;
+}
+
+.page-heading > p:last-child {
+  margin: 0.75rem 0 0;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .catalog-page {
+    width: min(calc(100% - 2rem), 36rem);
+  }
+}

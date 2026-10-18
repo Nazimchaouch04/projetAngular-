@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
 import { Header } from './header';
 import { BookingService } from '../services/booking.service';
@@ -11,6 +12,7 @@ describe('Header', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Header],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Header);
@@ -29,7 +31,7 @@ describe('Header', () => {
 
     expect(count.textContent?.trim()).toBe('0');
     expect(fixture.nativeElement.querySelector('.program-link').getAttribute('href')).toBe(
-      '#programme',
+      '/inscription',
     );
 
     bookingService.book(conference);

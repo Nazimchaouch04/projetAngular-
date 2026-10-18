@@ -1,0 +1,46 @@
+<main class="confirmation-page">
+  @if (conference(); as selectedConference) {
+    @if (isBooked()) {
+      <section class="confirmation-card" aria-labelledby="confirmation-title">
+        <span class="confirmation-mark" aria-hidden="true">✓</span>
+        <p class="eyebrow">Inscription validée</p>
+        <h1 id="confirmation-title">Votre place est réservée !</h1>
+        <p class="confirmation-intro">
+          Votre inscription à <strong>{{ selectedConference.title }}</strong> est confirmée.
+        </p>
+        <dl>
+          <div>
+            <dt>Date</dt>
+            <dd>{{ selectedConference.date | date: 'dd/MM/yyyy' }}</dd>
+          </div>
+          <div>
+            <dt>Lieu</dt>
+            <dd>{{ selectedConference.place }}</dd>
+          </div>
+        </dl>
+        <a class="primary-action" routerLink="/inscription">Consulter mon programme</a>
+        <a class="secondary-action" [routerLink]="['/conferences', selectedConference.id]">
+          Retour à la conférence
+        </a>
+      </section>
+    } @else {
+      <section class="confirmation-card" aria-labelledby="confirmation-title">
+        <p class="eyebrow">Inscription non confirmée</p>
+        <h1 id="confirmation-title">Aucune réservation active</h1>
+        <p class="confirmation-intro">
+          Aucune inscription active n’a été trouvée pour {{ selectedConference.title }}.
+        </p>
+        <a class="primary-action" [routerLink]="['/conferences', selectedConference.id]">
+          Consulter la conférence
+        </a>
+      </section>
+    }
+  } @else {
+    <section class="confirmation-card" aria-labelledby="confirmation-title">
+      <p class="eyebrow">ConfTech</p>
+      <h1 id="confirmation-title">Conférence introuvable</h1>
+      <p class="confirmation-intro">Cette confirmation ne correspond à aucune conférence connue.</p>
+      <a class="primary-action" routerLink="/conferences">Parcourir le catalogue</a>
+    </section>
+  }
+</main>
