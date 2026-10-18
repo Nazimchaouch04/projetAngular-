@@ -30,10 +30,12 @@
               remainingSeats(conference) > 0 && remainingSeats(conference) < 10
             "
             [class.seats-red]="remainingSeats(conference) === 0"
-            [disabled]="remainingSeats(conference) === 0"
+            [disabled]="remainingSeats(conference) === 0 || isBooked(conference)"
             (click)="register(conference)"
           >
-            @if (remainingSeats(conference) > 0) {
+            @if (isBooked(conference)) {
+              Déjà inscrit
+            } @else if (remainingSeats(conference) > 0) {
               S’inscrire
             } @else {
               Complet

@@ -23,6 +23,7 @@ describe('DetailsConference', () => {
 
   it('should display the conference passed by its parent', () => {
     const conference: ConferenceListing = {
+      id: 'test-conference',
       title: 'Conférence de test',
       description: 'Description de test',
       date: '2026-11-12',
@@ -53,23 +54,26 @@ describe('DetailsConference', () => {
 
   it('should register and decrease the number of available seats', () => {
     const button: HTMLButtonElement = fixture.nativeElement.querySelector('button');
+    const seatsBefore = component.availableSeats();
 
-    expect(component.availableSeats()).toBe(18);
+    expect(seatsBefore).toBeGreaterThan(0);
 
     button.click();
     fixture.detectChanges();
 
-    expect(component.availableSeats()).toBe(17);
+    expect(component.availableSeats()).toBe(seatsBefore - 1);
     expect(fixture.nativeElement.textContent).toContain(
       'Votre inscription est prise en compte.',
     );
   });
 
-  it('should hide the registration button when no seats remain', () => {
-    component.availableSeats.set(0);
+  it('should reflect the same booking state as the catalog', () => {
+    const seatsBefore = component.availableSeats();
+    component.register();
     fixture.detectChanges();
 
+    expect(component.availableSeats()).toBe(seatsBefore - 1);
+    expect(fixture.nativeElement.textContent).toContain('Vous êtes déjà inscrit');
     expect(fixture.nativeElement.querySelector('button')).toBeNull();
-    expect(fixture.nativeElement.textContent).toContain('Toutes les places sont réservées.');
   });
 });

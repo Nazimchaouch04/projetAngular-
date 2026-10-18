@@ -1,23 +1,25 @@
-@if (conf(); as conference) {
-  <article class="conference-card" aria-label="Conférence sélectionnée">
-    <p class="section-label">Conférence sélectionnée</p>
-    <h2>{{ conference.title }}</h2>
-    <p class="conference-description">{{ conference.description }}</p>
-    <dl class="conference-facts">
-      <div>
-        <dt>Date</dt>
-        <dd>{{ conference.date | date: 'dd/MM/yyyy' }}</dd>
-      </div>
-      <div>
-        <dt>Lieu</dt>
-        <dd>{{ conference.place }}</dd>
-      </div>
-      <div>
-        <dt>Participants</dt>
-        <dd>{{ conference.nbParticipants }} / {{ conference.maxParticipants }}</dd>
-      </div>
-    </dl>
-  </article>
+@if (conf()) {
+  @if (currentConference(); as conference) {
+    <article class="conference-card" aria-label="Conférence sélectionnée">
+      <p class="section-label">Conférence sélectionnée</p>
+      <h2>{{ conference.title }}</h2>
+      <p class="conference-description">{{ conference.description }}</p>
+      <dl class="conference-facts">
+        <div>
+          <dt>Date</dt>
+          <dd>{{ conference.date | date: 'dd/MM/yyyy' }}</dd>
+        </div>
+        <div>
+          <dt>Lieu</dt>
+          <dd>{{ conference.place }}</dd>
+        </div>
+        <div>
+          <dt>Participants</dt>
+          <dd>{{ conference.nbParticipants }} / {{ conference.maxParticipants }}</dd>
+        </div>
+      </dl>
+    </article>
+  }
 } @else {
   <section class="conference-card" aria-labelledby="conference-detail-title">
     <p class="section-label">À la une</p>
@@ -50,8 +52,10 @@
       </div>
     </dl>
 
-    @if (availableSeats() > 0) {
+    @if (availableSeats() > 0 && !isBooked()) {
       <button type="button" (click)="register()">S’inscrire</button>
+    } @else if (isBooked()) {
+      <p class="registration-message" role="status">Vous êtes déjà inscrit à cette conférence.</p>
     } @else {
       <p class="sold-out" role="status">Toutes les places sont réservées.</p>
     }

@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, output, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import type { ConferenceListing } from '../conference';
+import { BookingService } from '../services/booking.service';
+import { ConferenceService } from '../services/conference.service';
 
 @Component({
   selector: 'app-liste-conference',
@@ -11,52 +13,16 @@ import type { ConferenceListing } from '../conference';
 })
 export class ListeConference {
   readonly conferenceSelected = output<ConferenceListing>();
-  readonly conferences = signal<ConferenceListing[]>([
-    {
-      title: 'Angular et les applications réactives',
-      description: 'Découvrez les Signals et les nouveautés du framework Angular.',
-      date: '2026-11-12',
-      place: 'Tunis',
-      maxParticipants: 120,
-      nbParticipants: 46,
-    },
-    {
-      title: 'Concevoir des interfaces accessibles',
-      description: 'Bonnes pratiques pour créer des interfaces inclusives.',
-      date: '2026-12-03',
-      place: 'Sousse',
-      maxParticipants: 80,
-      nbParticipants: 73,
-    },
-    {
-      title: 'Rencontre des développeurs web',
-      description: 'Une journée d’échanges autour des technologies web.',
-      date: '2027-01-22',
-      place: 'Sfax',
-      maxParticipants: 50,
-      nbParticipants: 50,
-    },
-    {
-      title: 'Conférence passée',
-      description: 'Cette conférence passée ne doit pas apparaître.',
-      date: '2025-05-10',
-      place: 'Tunis',
-      maxParticipants: 60,
-      nbParticipants: 32,
-    },
-  ]);
-
-  readonly upcomingConferences = computed(() => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    return this.conferences().filter(
-      (conference) => new Date(`${conference.date}T00:00:00`) >= today,
-    );
-  });
+  private readonly conferenceService = inject(ConferenceService);
+  private readonly bookingService = inject(BookingService);
+  readonly upcomingConferences = this.conferenceService.upcomingConferences;
 
   remainingSeats(conference: ConferenceListing): number {
-    return Math.max(0, conference.maxParticipants - conference.nbParticipants);
+    return this.conferenceService.remainingSeats(conference);
+  }
+
+  isBooked(conference: ConferenceListing): boolean {
+    return this.bookingService.isBooked(conference);
   }
 
   selectConference(conference: ConferenceListing): void {
@@ -64,14 +30,6 @@ export class ListeConference {
   }
 
   register(conference: ConferenceListing): void {
-    if (this.remainingSeats(conference) === 0) {
-      return;
-    }
-
-    this.conferences.update((conferences) =>
-      conferences.map((item) =>
-        item === conference ? { ...item, nbParticipants: item.nbParticipants + 1 } : item,
-      ),
-    );
+    this.bookingService.book(conference);
   }
 }

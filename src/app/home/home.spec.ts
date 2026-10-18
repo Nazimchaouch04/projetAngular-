@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Home } from './home';
+import { BookingService } from '../services/booking.service';
 
 describe('Home', () => {
   let component: Home;
@@ -69,5 +70,23 @@ describe('Home', () => {
 
     expect(page.textContent).toContain('Concevoir des interfaces accessibles');
     expect(page.textContent).toContain('Sousse');
+  });
+
+  it('should synchronize a booking with the navigation and profile program', () => {
+    const page: HTMLElement = fixture.nativeElement;
+    const registerButton = Array.from(
+      page.querySelectorAll<HTMLButtonElement>('.registration-button'),
+    ).find((button) => button.textContent?.includes('S’inscrire'));
+
+    expect(registerButton).toBeDefined();
+    registerButton?.click();
+    fixture.detectChanges();
+
+    expect(TestBed.inject(BookingService).bookingCount()).toBe(1);
+    expect(page.querySelector('.booking-count')?.textContent?.trim()).toBe('1');
+    expect(page.querySelector('#programme')?.textContent).toContain(
+      'Angular et les applications réactives',
+    );
+    expect(page.textContent).toContain('Déjà inscrit');
   });
 });

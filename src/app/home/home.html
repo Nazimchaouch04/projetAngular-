@@ -1,34 +1,42 @@
 <main>
-  <header class="page-heading">
-    <p class="eyebrow">Votre espace personnel</p>
-    <h1>Bienvenue, Nazim</h1>
-    <p class="intro">Retrouvez votre profil, votre communauté et les dernières nouvelles.</p>
+  <header class="welcome-panel">
+    <div class="welcome-copy">
+      <p class="eyebrow">Votre espace personnel</p>
+      <h1>Bienvenue, Nazim<span>.</span></h1>
+      <p class="intro">Retrouvez votre communauté et les idées qui font avancer la tech.</p>
+    </div>
+    <div class="welcome-note" aria-hidden="true">
+      <span class="note-icon">✦</span>
+      <p>Les bonnes idées<br /><strong>se partagent.</strong></p>
+    </div>
   </header>
   <app-navigation></app-navigation>
-  <div class="profile-layout">
+  <div class="dashboard-grid">
     <app-user-profile></app-user-profile>
     <app-friends-list></app-friends-list>
     <app-notifications></app-notifications>
   </div>
-  <section class="conference-section" id="conferences" aria-labelledby="conference-list-title">
-    <app-liste-conference
-      (conferenceSelected)="selectConference($event)"
-    ></app-liste-conference>
-  </section>
-  <section
-    class="conference-section"
-    id="conference-detail"
-    aria-labelledby="conference-section-title"
-  >
-    <header class="section-intro">
-      <p class="eyebrow">Data-binding et Signals</p>
-      <h2 id="conference-section-title">Détail d’une conférence</h2>
-      @if (selectedConference()) {
-        <p>Conférence sélectionnée dans la liste.</p>
-      } @else {
-        <p>Modifiez le titre ou inscrivez-vous pour voir l’interface réagir immédiatement.</p>
-      }
-    </header>
-    <app-details-conference [conf]="selectedConference()"></app-details-conference>
-  </section>
+  <div class="conference-layout">
+    <section class="conference-section" id="conferences" aria-labelledby="conference-list-title">
+      <app-liste-conference
+        (conferenceSelected)="selectConference($event)"
+      ></app-liste-conference>
+    </section>
+    <section
+      class="conference-section detail-section"
+      id="conference-detail"
+      aria-labelledby="conference-section-title"
+    >
+      <header class="section-intro">
+        <p class="eyebrow">Data-binding et Signals</p>
+        <h2 id="conference-section-title">Détail d’une conférence</h2>
+        @if (selectedConference()) {
+          <p>Conférence sélectionnée dans la liste.</p>
+        } @else {
+          <p>Modifiez le titre ou inscrivez-vous pour voir l’interface réagir immédiatement.</p>
+        }
+      </header>
+      <app-details-conference [conf]="selectedConference()"></app-details-conference>
+    </section>
+  </div>
 </main>
