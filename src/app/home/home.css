@@ -1,18 +1,31 @@
 main {
-  width: min(1100px, calc(100% - 2.5rem));
+  width: min(1280px, calc(100% - 3rem));
   min-height: 55vh;
   margin: 0 auto;
-  padding: clamp(2.5rem, 7vw, 5rem) 0 1rem;
+  padding: clamp(2rem, 5vw, 4rem) 0 1rem;
 }
 
-.page-heading {
-  max-width: 700px;
-  margin-bottom: 2rem;
+.welcome-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 14rem;
+  margin-bottom: 1.5rem;
+  padding: clamp(1.75rem, 5vw, 3.5rem);
+  overflow: hidden;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 82% 20%, rgb(255 255 255 / 16%), transparent 13rem),
+    linear-gradient(115deg, #29295f, #5656c9 66%, #7474df);
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 45px rgb(55 55 130 / 16%);
 }
 
 .eyebrow {
-  margin: 0 0 0.65rem;
-  color: var(--color-primary);
+  margin: 0 0 0.7rem;
+  color: #c9c9ff;
   font-size: 0.8rem;
   font-weight: 750;
   letter-spacing: 0.14em;
@@ -21,29 +34,76 @@ main {
 
 h1 {
   margin: 0;
-  color: var(--color-ink);
+  color: #ffffff;
   font-size: clamp(2rem, 5vw, 3.3rem);
   letter-spacing: -0.055em;
   line-height: 1.1;
 }
 
+h1 span {
+  color: #f6ca69;
+}
+
 .intro {
   margin: 1rem 0 0;
-  color: var(--color-muted);
+  color: #e3e3ff;
   font-size: 1.08rem;
   line-height: 1.6;
 }
 
-.profile-layout {
+.welcome-note {
+  display: grid;
+  flex: 0 0 12rem;
+  min-height: 9rem;
+  align-content: center;
+  justify-items: center;
+  color: #ffffff;
+  background: rgb(255 255 255 / 10%);
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 1.1rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.note-icon {
+  color: #f6ca69;
+  font-size: 1.7rem;
+}
+
+.welcome-note p {
+  margin: 0.5rem 0 0;
+  line-height: 1.4;
+}
+
+.dashboard-grid {
   display: grid;
   align-items: stretch;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1rem;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.dashboard-grid > app-user-profile {
+  grid-column: span 5;
+}
+
+.dashboard-grid > app-friends-list {
+  grid-column: span 3;
+}
+
+.dashboard-grid > app-notifications {
+  grid-column: span 4;
+}
+
+.conference-layout {
+  display: grid;
+  align-items: start;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(0, 1.7fr) minmax(18rem, 0.85fr);
+  margin-top: clamp(3rem, 6vw, 5rem);
 }
 
 .conference-section {
-  max-width: 760px;
-  margin-top: clamp(3rem, 7vw, 5rem);
+  min-width: 0;
 }
 
 .section-intro {
@@ -53,12 +113,61 @@ h1 {
 .section-intro h2 {
   margin: 0;
   color: var(--color-ink);
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
   letter-spacing: -0.04em;
 }
 
 .section-intro > p:last-child {
   margin: 0.55rem 0 0;
   color: var(--color-muted);
+  font-size: 0.92rem;
   line-height: 1.5;
+}
+
+.detail-section {
+  position: sticky;
+  top: 1.5rem;
+}
+
+@media (max-width: 1050px) {
+  .dashboard-grid > app-user-profile,
+  .dashboard-grid > app-friends-list {
+    grid-column: span 6;
+  }
+
+  .dashboard-grid > app-notifications {
+    grid-column: span 12;
+  }
+
+  .conference-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.8fr);
+  }
+}
+
+@media (max-width: 720px) {
+  main {
+    width: min(calc(100% - 2rem), 36rem);
+  }
+
+  .welcome-panel {
+    min-height: 0;
+  }
+
+  .welcome-note {
+    display: none;
+  }
+
+  .dashboard-grid > app-user-profile,
+  .dashboard-grid > app-friends-list,
+  .dashboard-grid > app-notifications {
+    grid-column: span 12;
+  }
+
+  .conference-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-section {
+    position: static;
+  }
 }

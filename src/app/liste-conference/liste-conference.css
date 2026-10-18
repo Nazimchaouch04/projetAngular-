@@ -36,7 +36,7 @@ h2 {
   background: #ffffff;
   border: 1px solid var(--color-border);
   border-radius: 0.9rem;
-  box-shadow: 0 10px 28px rgb(23 43 77 / 5%);
+  box-shadow: 0 10px 28px rgb(32 36 58 / 5%);
 }
 
 .conference-date {
@@ -88,11 +88,11 @@ button {
 .details-button {
   margin-top: 1rem;
   color: var(--color-primary-dark);
-  background: #e1f2f3;
+  background: #ededff;
 }
 
 .details-button:hover {
-  background: #cce9eb;
+  background: #ddddff;
 }
 
 .registration-button {

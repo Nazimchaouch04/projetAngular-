@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import type { ConferenceListing } from '../conference';
+import { BookingService } from '../services/booking.service';
+import { ConferenceService } from '../services/conference.service';
 
 @Component({
   selector: 'app-details-conference',
@@ -11,10 +13,22 @@ import type { ConferenceListing } from '../conference';
 })
 export class DetailsConference {
   readonly conf = input<ConferenceListing | null>(null);
+  private readonly conferenceService = inject(ConferenceService);
+  private readonly bookingService = inject(BookingService);
+  readonly currentConference = computed(() => {
+    const selected = this.conf();
+    const catalog = this.conferenceService.conferences();
+    return selected
+      ? (catalog.find((conference) => conference.id === selected.id) ?? selected)
+      : (this.conferenceService.upcomingConferences()[0] ?? null);
+  });
   readonly title = signal('Angular et les applications réactives');
   readonly speaker = signal('Sarra Amri');
   readonly eventDate = signal('2026-11-12');
-  readonly availableSeats = signal(18);
+  readonly availableSeats = computed(() => {
+    const conference = this.currentConference();
+    return conference ? this.conferenceService.remainingSeats(conference) : 0;
+  });
   readonly registrationMessage = signal('');
 
   updateTitle(event: Event): void {
@@ -24,13 +38,23 @@ export class DetailsConference {
   }
 
   register(): void {
-    const seats = this.availableSeats();
-
-    if (seats === 0) {
+    const conference = this.currentConference();
+    if (!conference) {
+      this.registrationMessage.set('Aucune conférence disponible pour le moment.');
       return;
     }
 
-    this.availableSeats.set(seats - 1);
-    this.registrationMessage.set('Votre inscription est prise en compte.');
+    if (this.bookingService.book(conference)) {
+      this.registrationMessage.set('Votre inscription est prise en compte.');
+    } else if (this.bookingService.isBooked(conference)) {
+      this.registrationMessage.set('Vous êtes déjà inscrit à cette conférence.');
+    } else {
+      this.registrationMessage.set('Toutes les places sont réservées.');
+    }
+  }
+
+  isBooked(): boolean {
+    const conference = this.currentConference();
+    return conference ? this.bookingService.isBooked(conference) : false;
   }
 }
