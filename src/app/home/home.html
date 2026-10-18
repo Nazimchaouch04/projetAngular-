@@ -16,27 +16,12 @@
     <app-friends-list></app-friends-list>
     <app-notifications></app-notifications>
   </div>
-  <div class="conference-layout">
-    <section class="conference-section" id="conferences" aria-labelledby="conference-list-title">
-      <app-liste-conference
-        (conferenceSelected)="selectConference($event)"
-      ></app-liste-conference>
-    </section>
-    <section
-      class="conference-section detail-section"
-      id="conference-detail"
-      aria-labelledby="conference-section-title"
-    >
-      <header class="section-intro">
-        <p class="eyebrow">Data-binding et Signals</p>
-        <h2 id="conference-section-title">Détail d’une conférence</h2>
-        @if (selectedConference()) {
-          <p>Conférence sélectionnée dans la liste.</p>
-        } @else {
-          <p>Modifiez le titre ou inscrivez-vous pour voir l’interface réagir immédiatement.</p>
-        }
-      </header>
-      <app-details-conference [conf]="selectedConference()"></app-details-conference>
-    </section>
-  </div>
+  <section class="catalog-callout" aria-labelledby="catalog-callout-title">
+    <div>
+      <p class="eyebrow">À découvrir</p>
+      <h2 id="catalog-callout-title">Les prochaines conférences vous attendent.</h2>
+      <p>Parcourez le catalogue et ouvrez une fiche partageable pour chaque événement.</p>
+    </div>
+    <a routerLink="/conferences">Voir le catalogue</a>
+  </section>
 </main>

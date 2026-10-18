@@ -1,11 +1,36 @@
 <header class="site-header">
   <div class="header-content">
-    <a class="brand" href="/" aria-label="Conférences, accueil">
+    <a class="brand" routerLink="/" aria-label="Conférences, accueil">
       <span class="brand-mark" aria-hidden="true">C</span>
       <span>Conférences</span>
     </a>
     <p class="header-caption">Découvrez les rendez-vous qui font avancer les idées.</p>
-    <a class="program-link" href="#programme">
+    <nav class="primary-navigation" aria-label="Navigation principale">
+      <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">
+        Accueil
+      </a>
+      <a
+        routerLink="/conferences"
+        routerLinkActive="is-active"
+        ariaCurrentWhenActive="page"
+      >Conférences</a>
+      <a
+        routerLink="/inscription"
+        routerLinkActive="is-active"
+        ariaCurrentWhenActive="page"
+      >Inscription</a>
+      <a
+        routerLink="/profil"
+        routerLinkActive="is-active"
+        ariaCurrentWhenActive="page"
+      >Profil</a>
+      <a
+        routerLink="/contact"
+        routerLinkActive="is-active"
+        ariaCurrentWhenActive="page"
+      >Contact</a>
+    </nav>
+    <a class="program-link" routerLink="/inscription" routerLinkActive="is-active">
       Mon programme <span>{{ bookingService.bookingCount() }}</span>
     </a>
   </div>
